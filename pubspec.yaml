@@ -1,0 +1,5 @@
+name: awst.in
+description: Some site
+dependencies:
+  browser: any
+  oauth2: any
