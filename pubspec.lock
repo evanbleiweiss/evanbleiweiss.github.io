@@ -21,6 +21,10 @@ packages:
     description: http_parser
     source: hosted
     version: "0.0.2+2"
+  json_object:
+    description: json_object
+    source: hosted
+    version: "1.0.18+2"
   oauth2:
     description: oauth2
     source: hosted

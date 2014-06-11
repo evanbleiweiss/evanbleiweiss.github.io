@@ -1,5 +1,6 @@
-name: awst.in
+name: awst
 description: Some site
 dependencies:
   browser: any
+  json_object: any
   oauth2: any
