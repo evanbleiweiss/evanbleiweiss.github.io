@@ -12,7 +12,7 @@ import "package:json_object/json_object.dart";
 
 void main() {
   /* querySelector('#inputName').onInput.listen(updateBadge); */
-  locateEvan("Austin, TX");
+  locateEvan("78756");
 //  getLatestTweet();
 //  new Uri.https('api.twitter.com', '/1.1/statuses/user_timeline.json?screenname=evanbleiweiss&count=1');
 }
@@ -29,8 +29,10 @@ locateEvan(place) {
 
 locationPrintHelper(locationData) {
   var loc = new JsonObject.fromJsonString(locationData);
-  //TODO: Move text into template
-  textInject('#myLocation', "Coming to you from ${loc.query.results.place.first.name}, ${loc.query.results.place.first.admin1.content}");
+  /* textInject('#myLocation', "${loc.query.results.place.first.name}, "); */
+  /* textInject('#myLocation2', " ${loc.query.results.place.first.admin1.content}"); */
+  querySelector('#myLocation').text = loc.query.results.place.first.locality1.content + ', ';
+  querySelector('#myLocation2').text = loc.query.results.place.first.admin1.content;
 }
 
 textInject(selector, msg) {
