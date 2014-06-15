@@ -1,4 +1,4 @@
-part of awst;
+//part of awst;
 
 auth() {
 // These URLs are endpoints that are provided by the authorization

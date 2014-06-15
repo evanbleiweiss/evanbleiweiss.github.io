@@ -4,8 +4,7 @@ library awst;
 import 'dart:html';
 //import 'dart:io';
 //import 'package:oauth2/oauth2.dart' as oauth2;
-//import 'dart:convert' show JSON;
-import 'dart:convert';
+
 import 'dart:async';
 
 import "package:json_object/json_object.dart";
@@ -24,7 +23,7 @@ void main() {
 
 locateEvan(place) {
   var yqlUri = "http://query.yahooapis.com/v1/public/yql";
-  var params = "?q=select * from geo.places where text=\"${place}\"&format=json";
+  var params = "?q=select * from geo.places where text=\"$place\"&format=json";
   HttpRequest.getString(yqlUri+params).then(locationPrintHelper);
 }
 
