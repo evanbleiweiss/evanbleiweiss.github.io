@@ -7,8 +7,10 @@ import "package:json_object/json_object.dart";
 
 void main() {
   locateEvan("78756");
+  foodScores();
 }
 
+// BASIC YQL 
 locateEvan(place) {
   var yqlUri = "http://query.yahooapis.com/v1/public/yql";
   var params = "?q=select * from geo.places where text=\"$place\"&format=json";
@@ -23,6 +25,17 @@ locationPrintHelper(locationData) {
   querySelector('#myLocation2').text = loc.query.results.place.first.admin1.content;
 }
 
+// DATA VIZ
+foodScores() {
+  var query = "http://data.austintexas.gov/resource/ecmv-9xxi.json";
+  HttpRequest.getString(query).then((content) {
+    //DO SOME D3 DATA MUNCHING
+    // figure out if it's better to encapsulate code like this or if the above `locateEvan` helper is better
+    print(content);
+  });
+}
+
+// GENERIC HELPERS
 textInject(selector, msg) {
   querySelector('$selector').text = '$msg';
 }
