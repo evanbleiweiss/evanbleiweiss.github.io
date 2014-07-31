@@ -4,3 +4,6 @@ dependencies:
   browser: any
   json_object: any
   oauth2: any
+  d3: any 
+  js: any 
+    
