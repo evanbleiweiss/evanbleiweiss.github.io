@@ -38,8 +38,23 @@ foodScores() {
   /*     box.callMethod('style', ["background-color", "red"]); */ 
   // END D3 Example
 
-  var query = HttpRequest.getString("http://data.austintexas.gov/resource/ecmv-9xxi.json");
-  var scoreData = new JsonObject.fromJsonString(query);
+
+  // Another D3 EXAMPLE
+  var dee = js.context['d3'];
+  var box = dee.callMethod('select', ["#svgbox"])
+            .callMethod('append', ['svg:svg'])
+            .callMethod('attr', ['width', 400])
+            .callMethod('attr', ['height', 300])
+  box.callMethod('append', ['svg:rect'])
+     .callMethod('attr', ["x", 100])
+     .callMethod('attr', ["y", 100])
+     .callMethod('attr', ["height", 100])
+     .callMethod('attr', ["width", 200]);
+  // END D3 Example
+
+
+  /* var query = HttpRequest.getString("http://data.austintexas.gov/resource/ecmv-9xxi.json"); */
+  /* var scoreData = new JsonObject.fromJsonString(query); */
   /* var scoreData = query['score']; */
   /* print(scoreData); */
   /* // add a script tag for the api required */
