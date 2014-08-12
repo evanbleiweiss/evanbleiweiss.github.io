@@ -44,7 +44,7 @@ foodScores() {
   var box = dee.callMethod('select', ["#svgbox"])
             .callMethod('append', ['svg:svg'])
             .callMethod('attr', ['width', 400])
-            .callMethod('attr', ['height', 300])
+            .callMethod('attr', ['height', 300]);
   box.callMethod('append', ['svg:rect'])
      .callMethod('attr', ["x", 100])
      .callMethod('attr', ["y", 100])
