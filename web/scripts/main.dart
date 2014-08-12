@@ -40,16 +40,16 @@ foodScores() {
 
 
   // Another D3 EXAMPLE
-  var dee = js.context['d3'];
-  var box = dee.callMethod('select', ["#svgbox"])
-            .callMethod('append', ['svg:svg'])
-            .callMethod('attr', ['width', 400])
-            .callMethod('attr', ['height', 300]);
-  box.callMethod('append', ['svg:rect'])
-     .callMethod('attr', ["x", 100])
-     .callMethod('attr', ["y", 100])
-     .callMethod('attr', ["height", 100])
-     .callMethod('attr', ["width", 200]);
+  /* var dee = js.context['d3']; */
+  /* var box = dee.callMethod('select', ["#svgbox"]) */
+  /*           .callMethod('append', ['svg:svg']) */
+  /*           .callMethod('attr', ['width', 400]) */
+  /*           .callMethod('attr', ['height', 300]); */
+  /* box.callMethod('append', ['svg:rect']) */
+  /*    .callMethod('attr', ["x", 100]) */
+  /*    .callMethod('attr', ["y", 100]) */
+  /*    .callMethod('attr', ["height", 100]) */
+  /*    .callMethod('attr', ["width", 200]); */
   // END D3 Example
 
 
