@@ -14,7 +14,6 @@ var foodScores = function() {
     .attr('height', 100)
     .attr('width', 200);
 
-  return canvas;
 }
 
 foodScores();
