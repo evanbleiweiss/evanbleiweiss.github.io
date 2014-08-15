@@ -1,7 +1,25 @@
 // Playing around with d3
 
 var foodScores = function() {
-  var foodScoresUri = 'http://data.austintexas.gov/resource/ecmv-9xxi.json';
+  var data;
+  var foodScoresUri = 'http://data.austintexas.gov/resource/ecmv-9xxi.json?zip_code=78756'; //Use Socrata (SODA) API endpoint to get data
+  var dataGrabbler = d3.json(foodScoresUri, function(error, json) {
+    if (error) return console.warn(error);
+    data = json;
+    dataMuncher();
+  })
+  .on("load", function(data){ console.log( data); })
+  .get();
+                                
+  console.log(dataGrabbler);
+
+  var xRange = d3.scale.linear().range ([20, 180]).domain([0, 300]);
+  var yRange = d3.scale.linear().range ([20, 180]).domain([0, 300]);
+  var dataMuncher = function(data) {
+    d3.select('#svgbox');
+      
+
+  }
 
   var canvas = d3
     .select('#svgbox')
