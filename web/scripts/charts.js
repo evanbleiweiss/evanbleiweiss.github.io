@@ -2,10 +2,11 @@
 
 var foodScores = function() {
   var data;
-  var foodScoresUri = 'http://data.austintexas.gov/resource/ecmv-9xxi.json?zip_code=78756'; //Use Socrata (SODA) API endpoint to get data
+  var foodScoresUri = 'http://data.austintexas.gov/resource/ecmv-9xxi.json?zip_code=78756&restaurant_name=banzai'; //Use Socrata (SODA) API endpoint to get data
 
   var xRange = d3.scale.linear().range ([20, 180]).domain([0, 300]);
   var yRange = d3.scale.linear().range ([20, 180]).domain([0, 300]);
+
 // EXPERIMENT
   var width = 500,
       height = 500,
@@ -41,24 +42,19 @@ var foodScores = function() {
     .attr("r",function(d) {return r(100);})
       .append("title")
       .text(function(d) {return d.restaurant_name;});
-    
-    // d3.text("hi").select('#svgbox');
-    // for ( var prop in data[0] ) {
-    //   console.log(prop);
-    // }
   }
 
-  function scoreChart(data) {
+  function makeCircles(data) {
     svg.selectAll("circle").data(data).enter()
     .append("circle")
-    .attr("cx", function(d) {return xRange(d.score);})
+    .attr("cx", function(d) {return xRange(+d.score);})
     .attr("cy", function(d) {return yRange(+d.score);})
     .attr("r",function(d) {return r(+d.score);})
       .append("title")
       .text(function(d) {return d.restaurant_name;});
   }
 
-  // could be written as
+  // remote request can be written as
   // d3.json(uri, callback);
   //          OR
   // d3.json(uri, function( error, json ) {
@@ -67,7 +63,7 @@ var foodScores = function() {
   // .on("load", function(json){
   //   PROCESS DATA HERE
   // })
-  var dataGrabbler = d3.json(foodScoresUri, scoreChart);
+  var dataGrabbler = d3.json(foodScoresUri, makeCircles);
 }
 
 foodScores();
