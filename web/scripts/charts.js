@@ -26,11 +26,18 @@ var foodScores = function() {
     // .attr('height', 300)
     // .attr('width', 400);
 // EOE
+
+  //Utility for converting (partial) epoch time to human format
+  //might use moment.js if this grows too big
+  var dateStripper = function(date) {
+    date = new Date(date);
+  }
+
   var dataMuncher = function(data) {
     svg.selectAll("circle").data(data).enter()
     .append("circle")
-    .attr("cx",function(d) {return xRange(Date(+d.inspection_date));})
-    .attr("cy",function(d) {return yRange(+d.score);})
+    .attr("cx", function(d) {return xRange(Date(+d.inspection_date));})
+    .attr("cy", function(d) {return yRange(+d.score);})
     .attr("r",function(d) {return r(100);})
       .append("title")
       .text(function(d) {return d.restaurant_name;});
