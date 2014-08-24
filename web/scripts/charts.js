@@ -29,11 +29,11 @@ var foodScores = function() {
 
   //Utility for converting (partial) epoch time to human format
   //might use moment.js if this grows too big
-  var dateStripper = function(date) {
-    date = new Date(date);
+  function humanTime(input) {
+    return new Date(parseFloat(input) * 1000);
   }
 
-  var dataMuncher = function(data) {
+  function dataMuncher(data) {
     svg.selectAll("circle").data(data).enter()
     .append("circle")
     .attr("cx", function(d) {return xRange(Date(+d.inspection_date));})
@@ -47,6 +47,17 @@ var foodScores = function() {
     //   console.log(prop);
     // }
   }
+
+  function scoreChart(data) {
+    svg.selectAll("circle").data(data).enter()
+    .append("circle")
+    .attr("cx", function(d) {return xRange(d.score);})
+    .attr("cy", function(d) {return yRange(+d.score);})
+    .attr("r",function(d) {return r(+d.score);})
+      .append("title")
+      .text(function(d) {return d.restaurant_name;});
+  }
+
   // could be written as
   // d3.json(uri, callback);
   //          OR
@@ -56,7 +67,7 @@ var foodScores = function() {
   // .on("load", function(json){
   //   PROCESS DATA HERE
   // })
-  var dataGrabbler = d3.json(foodScoresUri, dataMuncher);
+  var dataGrabbler = d3.json(foodScoresUri, scoreChart);
 }
 
 foodScores();
