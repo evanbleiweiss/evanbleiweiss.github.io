@@ -4,7 +4,8 @@ var foodScores = function() {
   var data;
   var foodScoresUri = 'http://data.austintexas.gov/resource/ecmv-9xxi.json?zip_code=78756&restaurant_name=banzai'; //Use Socrata (SODA) API endpoint to get data
 
-  var xRange = d3.scale.linear().range ([20, 180]).domain([0, 300]);
+  var xRange = d3.time.scale().range([0, height]).domain([new Date(2007, 01, 01), new Date(2015, 01, 01)]);
+  // var xRange = d3.scale.linear().range ([20, 180]).domain([0, 300]);
   var yRange = d3.scale.linear().range ([20, 180]).domain([0, 300]);
 
 // EXPERIMENT
@@ -13,7 +14,7 @@ var foodScores = function() {
       margin = 50;
   var x=d3.scale.linear().domain([0,100]).range([margin,width-margin]); //TODO: Make this a time scale - https://github.com/mbostock/d3/wiki/Time-Scales
   var y=d3.scale.linear().domain([0,100]).range([height-margin,margin]);
-  var r=d3.scale.linear().domain([0,500]).range([0,20]);
+  var r=d3.scale.linear().domain([0,100]).range([0,20]);
   
   // Select elements
   var svg = d3
@@ -27,12 +28,6 @@ var foodScores = function() {
     // .attr('height', 300)
     // .attr('width', 400);
 // EOE
-
-  //Utility for converting (partial) epoch time to human format
-  //might use moment.js if this grows too big
-  function humanTime(input) {
-    return new Date(parseFloat(input) * 1000);
-  }
 
   function dataMuncher(data) {
     svg.selectAll("circle").data(data).enter()
@@ -54,6 +49,12 @@ var foodScores = function() {
       .text(function(d) {return d.restaurant_name;});
   }
 
+  //Utility for converting (partial) epoch time to human format
+  //might use moment.js if this grows too big
+  function humanTime(input) {
+    return new Date(parseFloat(input) * 1000);
+  }
+  
   // remote request can be written as
   // d3.json(uri, callback);
   //          OR
