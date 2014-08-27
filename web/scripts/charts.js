@@ -5,10 +5,10 @@ var foodScores = function() {
   var foodScoresUri = 'http://data.austintexas.gov/resource/ecmv-9xxi.json?zip_code=78756'; //Use Socrata (SODA) API endpoint to get data
 
   var width = 500,
-      height = 500,
+      height = 250,
       margin = 50;
-  var xRange = d3.time.scale().range([margin,width-margin]).domain([new Date(2010, 01, 01), new Date(2015, 01, 01)]);
-  var yRange = d3.scale.linear().range([margin, height-margin]).domain([0, 100]);
+  var xRange = d3.time.scale().range([margin,width-margin]).domain([new Date(2011, 08, 15), new Date(2015, 01, 01)]);
+  var yRange = d3.scale.linear().range([height-margin, margin]).domain([77, 100]);
   var r=d3.scale.linear().domain([50,200]).range([0,20]);
   
   // Select elements
@@ -25,7 +25,7 @@ var foodScores = function() {
     .attr("cy", function(d) {return yRange(+d.score);})
     .attr("r",function(d) {return r(+d.score);})
     .append("title")
-    .text(function(d) {return d.restaurant_name;});
+    .text(function(d) {return d.restaurant_name +" "+ d.score +" "+ humanTime(+d.inspection_date);});
   }
 
   //Utility for converting (partial) epoch time to human format
@@ -45,6 +45,7 @@ var foodScores = function() {
   //   PROCESS DATA HERE
   // })
   var dataGrabbler = d3.json(foodScoresUri, makeCircles);
+  
 }
 
 foodScores();
