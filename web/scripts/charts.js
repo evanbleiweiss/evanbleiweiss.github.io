@@ -36,14 +36,16 @@ var foodScores = function() {
 
     svg
       .selectAll('svg')
-      .data(data)
+      .data(data.sort(function(a,b) { return +a.inspection_date- +b.inspection_date; }))
       .enter()
       .append("svg:path")
       .attr("class", "line")
       .attr("d", line(data))
       .attr("stroke", "blue")
       .attr("stroke-width", 2)
-      .attr('fill', 'none');
+      .attr('fill', 'none')
+      .append("title")
+      .text(function(d) {return d.score +" "+ humanTime(+d.inspection_date);});
   }
 
   //Utility for converting (partial) epoch time to human format
