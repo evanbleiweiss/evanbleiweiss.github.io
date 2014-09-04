@@ -7,8 +7,8 @@ var foodScores = function() {
   var width = 500,
       height = 250,
       margin = 50,
-      x = d3.time.scale().range([margin,width-margin]).domain([new Date(2011, 8, 15), new Date(2015, 01, 01)]),
-      y = d3.scale.linear().range([height-margin, margin]).domain([77, 100]);
+      xRange = d3.time.scale().range([margin,width-margin]).domain([new Date(2011, 08, 15), new Date(2015, 01, 01)]),
+      yRange = d3.scale.linear().range([height-margin, margin]).domain([77, 100]);
 
   // Primary selection. All others are subselect
   var svg = d3
@@ -31,18 +31,19 @@ var foodScores = function() {
 
   function makeLines(data) {
     var line = d3.svg.line()
-      .x(function(d) { return x(humanTime(+d.inspection_date)); })
-      .y(function(d) { return y(+d.score); });    
+      .x(function(d) { return xRange(humanTime(+d.inspection_date)); })
+      .y(function(d) { return yRange(+d.score); });
 
     svg
-      .append("g")
-      .attr("class", "score")
-      .selectAll('g')
+      .selectAll('svg')
       .data(data)
       .enter()
       .append("svg:path")
       .attr("class", "line")
-      .attr("d", line(data));
+      .attr("d", line(data))
+      .attr("stroke", "blue")
+      .attr("stroke-width", 2)
+      .attr('fill', 'none');
   }
 
   //Utility for converting (partial) epoch time to human format
