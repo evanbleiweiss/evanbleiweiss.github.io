@@ -6,24 +6,35 @@ var $ = require('gulp-load-plugins')();
 
 var paths = {
   bower:   'bower_components',
-  css:     'stylesheets/**/*.scss'
+  css:     'stylesheets/**/*.scss',
   scripts: 'scripts/**/*.coffee',
-  images: 'images/**/*'
+  images:  'images/**/*'
 };
 
-gulp.task('default', function() {
-  // place code for your default task here
+gulp.task('default', ['clean', 'coffee', 'html', 'styles'], function() {
+  //start this inside a function rather than the initializer array bc it seems
+  //like this needs to wait to execute after everything else finishes
+  gulp.start('webserver');
 });
 
-// Clean
+// Out with the old
 gulp.task('clean', function () {
   return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], 
     {read: false}).pipe($.clean());
 });
 
-// Minify and copy all JavaScript (except vendor scripts)
+// HTML
+gulp.task('html', function () {
+    return gulp.src('*.html')
+        // .pipe($.useref())
+        .pipe(gulp.dest('dist'))
+        // .pipe($.size())
+        // .pipe($.connect.reload());
+});
+
+// Minify and copy all Coffeescripts (except vendor scripts)
 // with sourcemaps all the way down
-gulp.task('scripts', function() {
+gulp.task('coffee', function() {
   return gulp.src(paths.scripts)
     .pipe($.sourcemaps.init())
       .pipe($.coffee())
@@ -31,12 +42,6 @@ gulp.task('scripts', function() {
       // .pipe(concat('all.min.js'))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('dist/scripts'));
-});
-
-// Bower helper
-gulp.task('bower', function() {
-    gulp.src('bower_components/**/*.js', {base: 'bower_components'})
-        .pipe(gulp.dest('dist/bower_components/'));
 });
 
 // Styles
@@ -52,3 +57,25 @@ gulp.task('styles', function () {
         // .pipe($.size())
         // .pipe($.connect.reload());
 });
+
+// Server
+gulp.task('webserver', function() {
+  gulp.src('dist')
+    .pipe($.webserver({
+      livereload: true,
+      // directoryListing: true,
+      // open: true
+    }));
+});
+
+
+//          //
+// One Offs //
+//          //
+
+// Bower helper
+gulp.task('bower', function() {
+    gulp.src('bower_components/**/*.js', {base: 'bower_components'})
+        .pipe(gulp.dest('dist/bower_components/'));
+});
+
