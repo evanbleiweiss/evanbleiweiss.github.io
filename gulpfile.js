@@ -27,14 +27,15 @@ gulp.task('clean', function () {
 gulp.task('html', function () {
     return gulp.src('*.html')
         // .pipe($.useref())
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('dist'));
         // .pipe($.size())
         // .pipe($.connect.reload());
 });
 
 // Minify and copy all Coffeescripts (except vendor scripts)
 // with sourcemaps all the way down
-gulp.task('coffee', function() {
+gulp.task('coffee', ['clean'], function() {
+  // ^^coffee really wants to be clean ^^
   return gulp.src(paths.scripts)
     .pipe($.sourcemaps.init())
       .pipe($.coffee())
@@ -53,7 +54,7 @@ gulp.task('styles', function () {
         }))
         .on('error', function (err) { console.log(err.message); })
         .pipe($.autoprefixer('last 1 version'))
-        .pipe(gulp.dest('dist/styles'))
+        .pipe(gulp.dest('dist/styles'));
         // .pipe($.size())
         // .pipe($.connect.reload());
 });
@@ -68,6 +69,32 @@ gulp.task('webserver', function() {
     }));
 });
 
+gulp.task('watchmen', ['default'], function () {
+// If this appears broken
+// see http://stackoverflow.com/questions/16748737/grunt-watch-error-waiting-fatal-error-watch-enospc
+// look into https://www.npmjs.org/package/gulp-watch
+
+    // Watch .json files
+    // gulp.watch('scripts/**/*.json', ['json']);
+
+    // Watch .html files
+    gulp.watch('*.html', ['html']);
+    
+    // Watch .scss files
+    gulp.watch('stylesheets/**/*.scss', ['styles']);
+
+    // Watch .jade files
+    // gulp.watch('app/template/**/*.jade', ['jade', 'html']);
+
+    // Watch .coffeescript files
+    gulp.watch('scripts/**/*.coffee', ['coffee']);
+
+    // Watch .js files
+    // gulp.watch('app/scripts/**/*.js', ['scripts']);
+
+    // Watch image files
+    gulp.watch('images/**/*', ['images']);
+});
 
 //          //
 // One Offs //
