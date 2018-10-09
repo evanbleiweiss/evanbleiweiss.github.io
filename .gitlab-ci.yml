@@ -1,0 +1,17 @@
+# example per https://gitlab.com/pages/gatsby/blob/master/.gitlab-ci.yml
+# This project uses yarn inside of the Docker image. Probably something to sync up at a future date
+image: node:6.10.0
+
+pages:
+  script:
+  - npm install
+  - npm install gatsby-cli
+  - node_modules/.bin/gatsby build --prefix-paths
+  artifacts:
+    paths:
+    - public
+  cache:
+    paths:
+      - node_modules
+  only:
+  - master
