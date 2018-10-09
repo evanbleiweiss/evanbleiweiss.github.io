@@ -25,7 +25,6 @@
     "gatsby-plugin-styled-components": "^3.0.0-beta.2",
     "gatsby-plugin-manifest": "2.0.4",
     "gatsby-plugin-offline": "2.0.5",
-    "gatsby-plugin-sw": "1.0.1",
     "gatsby-source-filesystem": "^1.5.39",
     "gatsby-transformer-remark": "^1.7.44",
     "isomorphic-fetch": "^2.2.1",
