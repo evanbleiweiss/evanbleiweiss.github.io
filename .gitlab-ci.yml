@@ -4,9 +4,8 @@ image: node:10.11.0
 
 pages:
   script:
-  - npm install
-  - npm install gatsby-cli
-  - node_modules/.bin/gatsby build
+  - yarn install
+  - yarn gatsby build
   artifacts:
     paths:
     - public
