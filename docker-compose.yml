@@ -4,11 +4,11 @@ services:
   app:
     build: .
     command: "./docker_entrypoint.sh"
-    container_name: "awst.in"
+    container_name: "gatsby-starter-modern"
     # deploy:
     #   restart_policy:
     #     condition: on-failure
-    image: "awst.in:latest"
+    image: "gatsby-starter-modern"
     ports:
       - "8000:8000"
     volumes:
