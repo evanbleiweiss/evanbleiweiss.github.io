@@ -1,6 +1,6 @@
 # example per https://gitlab.com/pages/gatsby/blob/master/.gitlab-ci.yml
 # This project uses yarn inside of the Docker image. Probably something to sync up at a future date
-image: node:10.11.0
+image: node:10.5.0
 
 pages:
   script:
